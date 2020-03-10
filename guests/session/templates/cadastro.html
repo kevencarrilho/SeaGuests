@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Cadastro de novo usuário{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<form align="center" class="p-4" method="post" action="{% url 'index' site %}?id={{id}}&ap={{ap}}" data-toggle="validator"  >
+    <h3>Cadastrar Usuário</h3>
+    {% csrf_token %}
+    <div class="form-group" align="left" >
+
+
+        <div id="div_id_nome" class="form-group"> <label for="id_nome" class=" requiredField">
+            Nome<span class="asteriskField">*</span> </label> <div class="">
+            <input type="text" name="nome" maxlength="60" class="textinput textInput form-control" required id="id_nome">
+        </div> </div>
+        <div id="div_id_telefone" class="form-group"> <label for="id_telefone" class=" requiredField">
+            Telefone<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="tel" placeholder="###.###.###-##" name="telefone" maxlength="11" class="textinput textInput form-control" required id="id_telefone"> </div> </div> <div id="div_id_bairro" class="form-group"> <label for="id_bairro" class=" requiredField">
+        Bairro<span class="asteriskField">*</span> </label>
+        <div class=""> <input type="text" name="bairro" maxlength="60" class="textinput textInput form-control" required id="id_bairro"> </div> </div> <div id="div_id_cidade" class="form-group"> <label for="id_cidade" class=" requiredField">
+        Cidade<span class="asteriskField">*</span> </label>
+        <div class=""> <input type="text" name="cidade" maxlength="60" class="textinput textInput form-control" required id="id_cidade"> </div> </div> <div id="div_id_estado" class="form-group"> <label for="id_estado" class=" requiredField">
+        Estado<span class="asteriskField">*</span> </label>
+        <div class="">
+            <select name="estado" class="select form-control" id="id_estado"> <option value="ac">AC</option> <option value="al">AL</option> <option value="ap">AP</option> <option value="am">AM</option> <option value="ba">BA</option> <option value="ce">CE</option> <option value="df">DF</option> <option value="es">ES</option> <option value="go">GO</option> <option value="ma">MA</option> <option value="mt">MT</option> <option value="ms">MS</option> <option value="mg">MG</option> <option value="pa" selected>PA</option> <option value="pb">PB</option> <option value="pr">PR</option> <option value="pe">PE</option> <option value="pi">PI</option> <option value="rj">RJ</option> <option value="rn">RN</option> <option value="rs">RS</option> <option value="ro">RO</option> <option value="rr">RR</option> <option value="sc">SC</option> <option value="sp">SP</option> <option value="se">SE</option>
+
+            </select> </div> </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Cadastrar</button>
+    </div>
+</form>
+{% endblock %}

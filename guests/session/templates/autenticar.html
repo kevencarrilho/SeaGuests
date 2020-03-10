@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Cadastro de novo usuário{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<form align="center" class="p-4" method="post" action="{% url 'authenticate' site %}?id={{id}}&ap={{ap}}" data-toggle="validator"  >
+    <img src="http://192.168.2.52:8080/img/LOGO.png" style="width:200px">
+    {% csrf_token %}
+    <div class="form-group" align="left" >
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Cadastrar</button>
+    </div>
+     <span class="mb-2">Ainda não tem cadastro? <a href="{% url 'cadastrar' site %}?id={{id}}&ap={{ap}}">Clique aqui</a></span>
+</form>
+{% endblock %}
