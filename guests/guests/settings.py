@@ -124,6 +124,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/var/www/html/'
 
-LOGIN_REDIRECT_URL = 'index'
-
+LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = 'main'
+LOGOUT_REDIRECT_URL = LOGIN_URL
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

@@ -20,7 +20,5 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('<site>/', views.first, name="index"),
-    path('<site>/authenticate/', views.authenticate, name="authenticate"),
-    path('<site>/cadastrar', views.cadastrar, name="cadastrar"),
+    path('inicio', views.main, name="main"),
 ]

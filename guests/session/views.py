@@ -55,7 +55,7 @@ def authenticate(request, site):
     # corrigir o get do lead
     lead= Lead.objects.filter(pk=telefone)
 
-    hostpot = Hostpot.objects.filter(mac=ap)
+    hostpot = Hostpot.objects.filter(mac=ap, ativo=True)
 
 
     if  hostpot:
@@ -75,7 +75,7 @@ def authenticate(request, site):
             form.add_error("telefone","Usuário não encontrado.")
             ap = request.GET.get("ap")
             id = request.GET.get("id")
-            return render(request, "autenticar.html", {
+            return render(request, "session/autenticar.html", {
                 "form": form,
                 "ap": ap,
                 "id": id,
@@ -84,13 +84,13 @@ def authenticate(request, site):
             }
                           )
     else:
-        return render(request, "error.html", {"messagen": "Parece que o seu Hostpot não está registrado, procure o administrador da sua rede."})
+        return render(request, "session/error.html", {"messagen": "Parece que o seu Hostpot não está registrado ou não foi ativo, procure o administrador da sua rede."})
 
 def cadastrar(request, site):
     form = LeadForm()
     ap = request.GET.get("ap")
     id = request.GET.get("id")
-    return render(request, "cadastro.html", {
+    return render(request, "session/cadastro.html", {
                                               "form": form,
                                               "ap": ap,
                                               "id": id,
@@ -98,7 +98,7 @@ def cadastrar(request, site):
                                             }
                   )
 
-def index(request, site):
+def first(request, site):
     if(request.POST):
         nome = request.POST.get("nome")
         telefone = request.POST.get("telefone")
@@ -109,7 +109,7 @@ def index(request, site):
     form = LoginForm(request.POST or None)
     ap = request.GET.get("ap")
     id = request.GET.get("id")
-    return render(request, "autenticar.html", {
+    return render(request, "session/autenticar.html", {
         "form": form,
         "ap": ap,
         "id": id,
