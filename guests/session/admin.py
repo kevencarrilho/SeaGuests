@@ -5,4 +5,3 @@ from .models import *
 
 admin.site.register(Session)
 admin.site.register(Lead)
-admin.site.register(Hostpot)

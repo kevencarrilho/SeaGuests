@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Parece que encontramos um erro{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div align="center" class="p-4"  >
+    <h3>Erro</h3>
+    {% csrf_token %}
+    <div class="form-group" align="left" >
+       {{messagen}}
+    </div>
+</div>
+{% endblock %}

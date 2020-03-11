@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="http://192.168.2.52:8080/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://170.82.180.21:5001/css/bootstrap.min.css">
+    <script src="http://170.82.180.21:5001/js/node_modules/jquery/dist/jquery.js"></script>
+    <script src="http://170.82.180.21:5001/package/dist/jquery.mask.js"></script>
 </head>
 <body  class="d-flex justify-content-center align-items-center h-100 w-100" style="background: rgb(10, 50, 80);">
-<div class="d-flex justify-content-center pt-3 bg-light" >
+<div class="pt-3 bg-light" >
     {% block content %}
     {% endblock %}
-    <div class="h-100" style="height: 10px; display: flex;">
+    <div style="height: 10px; display: flex;">
         <div style="background: rgb(242, 205, 38); flex-grow: 1;"></div>
         <div style="background: rgb(228, 167, 49); flex-grow: 1;"></div>
         <div style="background: rgb(201, 68, 63); flex-grow: 1;"></div>
@@ -23,9 +23,10 @@
 </div>
 
 <script type="text/javascript">
-  $('#id_telefone').mask('(00)00000-0000');
+  $('#id_telefone').mask('(00)0000-00000');
 
 </script>
 
 </body>
 </html>
+

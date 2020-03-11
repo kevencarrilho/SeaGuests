@@ -1,5 +1,4 @@
 from django import forms
-from django.db.models import QuerySet
 
 from .models import Lead, Session
 
@@ -14,7 +13,3 @@ class LoginForm(forms.ModelForm):
         model = Lead
         fields = ["telefone"]
 
-class SessionForm(forms.ModelForm):
-    class Meta:
-        model = Session
-        fields = ["nome", "lead"]

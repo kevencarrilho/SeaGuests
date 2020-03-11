@@ -3,12 +3,16 @@ from urllib.parse import urljoin
 
 from requests import Session
 
-from .forms import LeadForm, SessionForm, LoginForm
+from .forms import LeadForm, LoginForm
 from django.contrib.sites import requests
 from django.shortcuts import render, redirect, get_object_or_404
+# some_file.py
 
 # Create your views here.
 from . import models
+from .models import Lead
+dir()
+from manager.models import Hostpot
 
 UNIFI_SERVER = "https://unifi.seasolutions.com.br:8443/"
 USERNAME = "external"
@@ -46,19 +50,41 @@ def authenticate(request, site):
     mac = request.GET.get("id")
     ap = request.GET.get("ap")
     telefone = request.POST.get("telefone")
-    telefone = "+55" + telefone.replace('(', '').replace(')', '').replace('-', '')
+    if telefone:
+        telefone = telefone.replace('(', '').replace(')', '').replace('-', '')
     # corrigir o get do lead
-    lead= get_object_or_404(models.Lead,pk=telefone)
-    hostpot = get_object_or_404(models.Hostpot,pk=ap)
-    if  hostpot != None:
-        session = models.Session.objects.create(nome=hostpot.nome,lead=lead)
-            # (None).save(commit=False)
-        # session.name = hostpot.nome
-        # session.lead = lead
-        # session.save()
-        send_athorization(mac, 1, site)
-        return redirect("https://www.google.com")
+    lead= Lead.objects.filter(pk=telefone)
 
+    hostpot = Hostpot.objects.filter(mac=ap)
+
+
+    if  hostpot:
+        for a in hostpot:
+            hostpot = a
+        form = LoginForm(request.POST)
+        if lead:
+            for a in lead:
+                lead = a
+
+            if form.is_valid():
+                models.Session.objects.create(lead=lead,hostpot=hostpot)
+                send_athorization(mac, 1, site)
+                return redirect("https://www.google.com")
+
+        else:
+            form.add_error("telefone","Usuário não encontrado.")
+            ap = request.GET.get("ap")
+            id = request.GET.get("id")
+            return render(request, "autenticar.html", {
+                "form": form,
+                "ap": ap,
+                "id": id,
+                "site": site,
+                "erro": True
+            }
+                          )
+    else:
+        return render(request, "error.html", {"messagen": "Parece que o seu Hostpot não está registrado, procure o administrador da sua rede."})
 
 def cadastrar(request, site):
     form = LeadForm()
@@ -76,7 +102,7 @@ def index(request, site):
     if(request.POST):
         nome = request.POST.get("nome")
         telefone = request.POST.get("telefone")
-        telefone = "+55" + telefone.replace('(','').replace(')','').replace('-','')
+        telefone = telefone.replace('(','').replace(')','').replace('-','')
         bairro = request.POST.get("bairro")
         cidade = request.POST.get("cidade")
         models.Lead.objects.create(nome=nome, telefone=telefone, bairro=bairro, cidade=cidade)

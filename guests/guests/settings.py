@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'session',
+    'manager',
 ]
 
 MIDDLEWARE = [
