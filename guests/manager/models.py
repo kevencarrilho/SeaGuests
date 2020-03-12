@@ -4,7 +4,7 @@ from django.db import models
 
 class Hostpot(models.Model):
     nome = models.CharField(max_length=60, primary_key=True)
-    mac = models.CharField(max_length=60)
+    endereco_mac = models.CharField(max_length=20)
     rua = models.CharField(max_length=60)
     bairro = models.CharField(max_length=60)
     cidade = models.CharField(max_length=60)

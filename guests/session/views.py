@@ -48,24 +48,18 @@ def send_athorization(mac_id, minutes, site):
 def authenticate(request, site):
 
     mac = request.GET.get("id")
-    ap = request.GET.get("ap")
+    ap = request.GET.get("ap").replace(':', '')
     telefone = request.POST.get("telefone")
-    if telefone:
-        telefone = telefone.replace('(', '').replace(')', '').replace('-', '')
+    telefone = telefone.replace('(', '').replace(')', '').replace('-', '')
     # corrigir o get do lead
-    lead= Lead.objects.filter(pk=telefone)
+    lead= Lead.objects.filter(pk=telefone).first()
 
-    hostpot = Hostpot.objects.filter(mac=ap, ativo=True)
+    hostpot = Hostpot.objects.filter(ativo=True,endereco_mac=ap).first()
 
 
     if  hostpot:
-        for a in hostpot:
-            hostpot = a
         form = LoginForm(request.POST)
         if lead:
-            for a in lead:
-                lead = a
-
             if form.is_valid():
                 models.Session.objects.create(lead=lead,hostpot=hostpot)
                 send_athorization(mac, 1, site)

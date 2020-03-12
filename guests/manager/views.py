@@ -36,7 +36,7 @@ def save(request):
         nome=request.POST.get("nome"),
         defaults={
         "nome": request.POST.get("nome"),
-        "mac": request.POST.get("mac"),
+        "endereco_mac": request.POST.get("endereco_mac").replace(':', ''),
         "rua": request.POST.get("rua"),
         "bairro": request.POST.get("bairro"),
         "cidade": request.POST.get("cidade"),
