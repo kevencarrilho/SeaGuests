@@ -2,7 +2,7 @@
 {% block title %}Cadastro de novo usuário{% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
-<form align="center" class="p-4" method="post" action="{% url 'index' site %}?id={{id}}&ap={{ap}}" data-toggle="validator"  >
+<form align="center" class="pl-4 pr-4" method="post" action="{% url 'index' site %}?id={{id}}&ap={{ap}}" data-toggle="validator"  >
     <h3>Cadastrar Usuário</h3>
     {% csrf_token %}
     <div class="form-group" align="left" >

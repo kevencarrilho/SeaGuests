@@ -1,0 +1,17 @@
+{% extends "manager/base.html" %}
+{% block title %}Cadastro de Hostpot{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container  pt-5 pb-5 bg-light">
+    <h4>Informações do Hostpot</h4>
+    <form action="{% url 'save' %}" method="post" >
+
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="" align="right">
+            <button type="submit" class="btn btn-primary fixed-right">Salvar</button>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

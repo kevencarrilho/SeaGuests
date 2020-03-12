@@ -105,7 +105,13 @@ def first(request, site):
         telefone = telefone.replace('(','').replace(')','').replace('-','')
         bairro = request.POST.get("bairro")
         cidade = request.POST.get("cidade")
-        models.Lead.objects.create(nome=nome, telefone=telefone, bairro=bairro, cidade=cidade)
+        estado = request.POST.get("estado")
+        if request.POST.get("sou_cliente"):
+            sou_cliente = True
+        else:
+            sou_cliente = False
+        models.Lead.objects.create(nome=nome, telefone=telefone, bairro=bairro, cidade=cidade, estado=estado,
+        sou_cliente=sou_cliente)
     form = LoginForm(request.POST or None)
     ap = request.GET.get("ap")
     id = request.GET.get("id")

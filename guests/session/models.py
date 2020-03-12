@@ -14,6 +14,7 @@ class Lead(models.Model):
                                                     ("pe","PE"), ("pi","PI"), ("rj","RJ"), ("rn","RN"),
                                                     ("rs","RS"), ("ro","RO"), ("rr","RR"), ("sc","SC"),
                                                     ("sp","SP"), ("se","SE")),default='pa')
+    sou_cliente = models.BooleanField(default=False)
     def __str__(self):
         return self.nome
 

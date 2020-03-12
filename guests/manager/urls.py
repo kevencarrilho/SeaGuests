@@ -20,5 +20,8 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('inicio', views.main, name="main"),
+    path('', views.index, name='index'),
+    path('new/', views.new, name='new'),
+    path('edit/<str:nome>', views.edit, name='edit'),
+    path('save/', views.save, name='save'),
 ]

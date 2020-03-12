@@ -25,7 +25,7 @@ SECRET_KEY = '9*bi_kjk0eu%y0mo(j78k3%e%zgtrqkq%552agbl!ew4g^bp8l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.2.52", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["192.168.2.52", "localhost", "127.0.0.1", "170.82.180.21", "unifi.seasolutions.com.br"]
 
 
 # Application definition
@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'phonenumber_field',
     'crispy_forms',
     'session',
     'manager',
+    'report',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +78,14 @@ WSGI_APPLICATION = 'guests.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    'post': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'unifi_guest_portal',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+    },
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
@@ -125,6 +133,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = '/var/www/html/'
 
 LOGIN_URL = '/account/login/'
-LOGIN_REDIRECT_URL = 'main'
+LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = LOGIN_URL
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
